@@ -29,9 +29,54 @@ while True:
 world_x = list()
 for i in range(len_world):
     if world[i] == "0":
-        world_x.append("o")
+        world_x.append("■")
     else:
         world_x.append(" ")
 world = world_x
 
-print("ИЗНАЧАЛЬНЫЙ МИР:", "".join([x for x in world]))
+print("".join([x for x in world]))
+
+
+def klet_live(i):
+    ret = 1
+    if i == 0:
+        if world[-1] == world[i + 1]:
+            ret = 0
+    elif i == len(world) - 1:
+        if world[i - 1] == world[0]:
+            ret = 0
+    else:
+        if world[i - 1] == world[i + 1]:
+            ret = 0
+    return ret
+
+
+def klet_die(i):
+    ret = 0
+    if i == 0:
+        if world[-1] != world[i + 1]:
+            ret = 1
+    elif i == len(world) - 1:
+        if world[i - 1] != world[0]:
+            ret = 1
+    else:
+        if world[i - 1] != world[i + 1]:
+            ret = 1
+    return ret
+
+
+for n in range(n_print):
+    new_world = world.copy()
+    for i in range(len(world)):
+        if world[i] == "■":
+            live = klet_live(i)
+            if live == 0:
+                new_world[i] = " "
+        else:
+            live = klet_die(i)
+            if live == 1:
+                new_world[i] = "■"
+    world = new_world
+    print("".join([x for x in world]))
+
+input()
