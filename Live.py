@@ -18,7 +18,7 @@ while lets_go_play == 1:
 
     print("Теперь введите изначальный мир.")
     print("Если вы хотите чтобы в клетке не было жизни введите 0, иначе любую другую цыфру.")
-    while True:
+    while True:  # Проверка что изначальный мир соответсвует данной длине и что введены только цыфры
         world = input("Введите 'изначальный мир': ")
         if len(world) != len_world:
             if len(world) < len_world:
@@ -32,7 +32,7 @@ while lets_go_play == 1:
         break
 
     world_x = list()
-    for i in range(len_world):
+    for i in range(len_world):  # Создание мира
         if world[i] == "0":
             world_x.append("■")
         else:
@@ -42,7 +42,7 @@ while lets_go_play == 1:
     print("".join([x for x in world]))
 
 
-    def klet_live(i):
+    def klet_live(i):  # Функция в которой клетка может умереть
         ret = 1
         if i == 0:
             if world[-1] == world[i + 1]:
@@ -56,7 +56,7 @@ while lets_go_play == 1:
         return ret
 
 
-    def klet_die(i):
+    def klet_die(i):  # Функция в которой клетка может возродиться
         ret = 0
         if i == 0:
             if world[-1] != world[i + 1]:
@@ -70,9 +70,9 @@ while lets_go_play == 1:
         return ret
 
 
-    for n in range(n_print):
+    for n in range(n_print):  # Цикл поколенний
         new_world = world.copy()
-        for i in range(len(world)):
+        for i in range(len(world)):  # Проверка умрёт ли клетка или возродиться
             if world[i] == "■":
                 live = klet_live(i)
                 if live == 0:
@@ -83,7 +83,7 @@ while lets_go_play == 1:
                     new_world[i] = "■"
         world = new_world
         print("".join([x for x in world]))
-        time.sleep(0.5)
+        time.sleep(0.5)  # 'Задержка'
 
     print("Хотите сыграть ещё раз?")
     print("Если 'да' введите 1, иначе 0")
