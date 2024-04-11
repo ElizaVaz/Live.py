@@ -78,5 +78,6 @@ for n in range(n_print):
                 new_world[i] = "■"
     world = new_world
     print("".join([x for x in world]))
+    time.sleep(0.5)
 
 input()
